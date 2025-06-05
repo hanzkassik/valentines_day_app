@@ -1,0 +1,7 @@
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+
+  windows:
+    generate: true
+    image_path: "assets/images/coracao.png"
+    icon_size: 64 # min:48, max:256, default: 48
