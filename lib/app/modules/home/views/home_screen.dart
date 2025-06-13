@@ -14,48 +14,38 @@ class HomeScreen extends GetView<HomeController> {
       backgroundColor: const Color.fromARGB(255, 238, 88, 78),
       body: Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Nossa história',
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           Expanded(
             child: Obx(() {
+              print(MediaQuery.of(context).size.height);
               if (controller.status.value == HomeStatus.loading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
-              return Scrollbar(
-                child: ListView(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Nossa história',
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    CarouselSlider(
-                      items: controller.loveMessages.map((e) {
-                        return CardHistory(
-                          loveMessageModel: e,
-                        );
-                      }).toList(),
-                      options: CarouselOptions(
-                          enlargeCenterPage: true,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 5),
-                          enableInfiniteScroll: false,
-                          viewportFraction: 0.7,
-                          height: 500),
-                    ),
-                    // Column(
-                    //   children: controller.loveMessages
-                    //       .map((e) => CardHistory(loveMessageModel: e))
-                    //       .toList(),
-                    // ),
-                  ],
-                ),
+              return CarouselSlider(
+                items: controller.loveMessages.map((e) {
+                  return CardHistory(
+                    loveMessageModel: e,
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 5),
+                    enableInfiniteScroll: false,
+                    viewportFraction: 0.7,
+                    height: 500),
               );
             }),
           ),
